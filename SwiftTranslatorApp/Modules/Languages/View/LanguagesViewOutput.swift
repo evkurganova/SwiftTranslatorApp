@@ -14,4 +14,6 @@ protocol LanguagesViewOutput {
     */
 
     func viewIsReady()
+    func closeButtonClicked()
+    func languagePicked(with language: Language)
 }

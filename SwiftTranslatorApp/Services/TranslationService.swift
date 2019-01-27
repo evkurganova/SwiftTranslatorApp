@@ -16,7 +16,7 @@ class TranslationService {
     let baseUrl = "https://translate.yandex.net/api/v1.5/tr.json/"
     let apiKey = "trnsl.1.1.20150314T143415Z.27b846e36cc8cc1b.68a816b75ece8c9412a0e83d2f07d689f13426c9"
     
-    func translation(nativeWord: String, language: String, completionHandler: @escaping (Bool, Error?) -> Void) {
+    func translation(nativeWord: String, completionHandler: @escaping (Bool, Error?) -> Void) {
         
         //    https://translate.yandex.net/api/v1.5/tr.json/translate
         //    ? [key=<API-ключ>]
@@ -31,6 +31,8 @@ class TranslationService {
             completionHandler(false, nil)
             return
         }
+        
+        let language = DataService.sharedInstance.getCurrentLanguage().ID
         
         let urlString = String("\(baseUrl)translate?key=\(apiKey)&text=\(encodeWord)&lang=\(language)&options=1")
         
@@ -74,7 +76,7 @@ class TranslationService {
         }
     }
     
-    func languages(completionHandler: @escaping (Bool, Error?) -> Void) {
+    func updateLanguages(completionHandler: @escaping (Bool, Error?) -> Void) {
         
         //    https://translate.yandex.net/api/v1.5/tr.json/getLangs
         //    ? [key=<API-ключ>]

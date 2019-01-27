@@ -7,5 +7,13 @@
 //
 
 class LanguagesRouter: LanguagesRouterInput {
+    
+    weak var viewController: LanguagesViewController!
+    
+    func closeCurrentViewController() {
+        
+        viewController.dismiss(animated: true, completion: nil)
 
+    }
+    
 }

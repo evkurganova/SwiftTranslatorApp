@@ -7,7 +7,9 @@
 //
 
 import Foundation
+import UIKit
 
 protocol TranslationsRouterInput {
 
+    func showLanguageList()
 }

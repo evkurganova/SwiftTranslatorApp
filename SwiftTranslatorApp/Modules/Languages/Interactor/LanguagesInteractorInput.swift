@@ -10,4 +10,6 @@ import Foundation
 
 protocol LanguagesInteractorInput {
 
+    func setCurrentLanguage(with language: Language)
+    func getAllLanguages()
 }

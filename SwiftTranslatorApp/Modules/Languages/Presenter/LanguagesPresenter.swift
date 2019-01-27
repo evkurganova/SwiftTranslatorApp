@@ -13,6 +13,21 @@ class LanguagesPresenter: LanguagesModuleInput, LanguagesViewOutput, LanguagesIn
     var router: LanguagesRouterInput!
 
     func viewIsReady() {
-
+        
+        interactor.getAllLanguages()
+    }
+    
+    func showLanguagesList(languages: [Language]) {
+        
+        view.setList(of: languages)
+    }
+    
+    func closeButtonClicked() {
+        router.closeCurrentViewController()
+    }
+    
+    func languagePicked(with language: Language) {
+        
+        interactor.setCurrentLanguage(with: language)
     }
 }

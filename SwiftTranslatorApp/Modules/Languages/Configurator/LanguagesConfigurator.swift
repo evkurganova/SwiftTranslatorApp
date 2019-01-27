@@ -20,6 +20,7 @@ class LanguagesModuleConfigurator {
     private func configure(viewController: LanguagesViewController) {
 
         let router = LanguagesRouter()
+        router.viewController = viewController
 
         let presenter = LanguagesPresenter()
         presenter.view = viewController

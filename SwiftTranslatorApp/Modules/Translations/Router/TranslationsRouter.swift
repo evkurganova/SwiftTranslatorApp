@@ -8,4 +8,10 @@
 
 class TranslationsRouter: TranslationsRouterInput {
 
+    weak var viewController: TranslationsViewController!
+
+    func showLanguageList() {
+        viewController.performSegue(withIdentifier: viewController.selfToLanguagesSegueName, sender: nil)
+    }
+
 }

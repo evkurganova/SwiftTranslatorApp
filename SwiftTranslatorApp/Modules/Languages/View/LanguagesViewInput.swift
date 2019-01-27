@@ -14,4 +14,6 @@ protocol LanguagesViewInput: class {
     */
 
     func setupInitialState()
+    func setList(of languages: [Language])
+
 }

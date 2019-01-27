@@ -9,6 +9,11 @@
 import UIKit
 import RealmSwift
 
+extension Notification.Name {
+    
+    static let currentLanguageChanged = Notification.Name("currentLanguageChanged")
+}
+
 class DataService {
 
     private var realm: Realm
@@ -20,10 +25,11 @@ class DataService {
         realm = try! Realm()
     }
     
-    func getAllLanguages() -> Results<Language> {
+    func getAllLanguages() -> [Language] {
         
         let results: Results<Language> = realm.objects(Language.self).sorted(byKeyPath: "name", ascending: true)
-        return results;
+        let array = Array(results)
+        return array;
     }
     
     func getCurrentLanguage() -> Language {
@@ -55,8 +61,7 @@ class DataService {
             oldLanguage.isCurrent = false
             newCurrentLanguage.isCurrent = true
             
-//            [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationCurrentLanguageChanged object:nil];
-
+            NotificationCenter.default.post(name: .currentLanguageChanged, object: nil)
         }
     }
     
@@ -74,16 +79,18 @@ class DataService {
         try! realm.commitWrite()
     }
     
-    func getAllWords() -> Results<Word> {
+    func getAllWords() -> [Word] {
         
         let results: Results<Word> = realm.objects(Word.self).sorted(byKeyPath: "changedDate", ascending: false)
-        return results
+        let array = Array(results)
+        return array;
     }
     
-    func getAllWords(searchText: String) -> Results<Word> {
+    func getAllWords(searchText: String) -> [Word] {
         
         let results = realm.objects(Word.self).filter(NSPredicate(format: "translatedWord contains '\(searchText)' OR nativeWord contains '\(searchText)")).sorted(byKeyPath: "changedDate", ascending: false)
-        return results
+        let array = Array(results)
+        return array;
     }
     
     func createWord(nativeWord: String) {

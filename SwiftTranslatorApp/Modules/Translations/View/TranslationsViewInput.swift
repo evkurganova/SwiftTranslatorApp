@@ -14,4 +14,6 @@ protocol TranslationsViewInput: class {
     */
 
     func setupInitialState()
+    func setList(of words: [Word])
+    func setBarButtonTitle(with text:String)
 }

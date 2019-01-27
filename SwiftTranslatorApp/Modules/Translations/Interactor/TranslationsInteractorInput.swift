@@ -10,4 +10,10 @@ import Foundation
 
 protocol TranslationsInteractorInput {
 
+    func translateWord(with nativeText: String)
+    func remove(_ word: Word)
+    func getAllWords()
+    func getAllWords(with searchText: String)
+    func getCurrentLanguageName() -> String
+
 }

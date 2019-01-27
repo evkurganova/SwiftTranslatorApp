@@ -10,4 +10,5 @@ import Foundation
 
 protocol LanguagesInteractorOutput: class {
 
+    func showLanguagesList(languages: [Language])
 }

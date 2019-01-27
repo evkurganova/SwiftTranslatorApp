@@ -10,4 +10,6 @@ import Foundation
 
 protocol TranslationsInteractorOutput: class {
 
+    func showList(of words: [Word])
+
 }

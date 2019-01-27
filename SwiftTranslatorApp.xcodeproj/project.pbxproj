@@ -25,7 +25,6 @@
 		99C0532C21FD0DF20054601A /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C0532B21FD0DF20054601A /* DataService.swift */; };
 		99C0532E21FD12C10054601A /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C0532D21FD12C10054601A /* Word.swift */; };
 		99C0533021FD12DE0054601A /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C0532F21FD12DE0054601A /* Language.swift */; };
-		99C0533321FDD3170054601A /* LanguagesList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 99C0533221FDD3170054601A /* LanguagesList.storyboard */; };
 		99EE795421FC8709008F5C19 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99EE795321FC8709008F5C19 /* AppDelegate.swift */; };
 		99EE795921FC8709008F5C19 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 99EE795721FC8709008F5C19 /* Main.storyboard */; };
 		99EE795B21FC870B008F5C19 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 99EE795A21FC870B008F5C19 /* Assets.xcassets */; };
@@ -62,7 +61,6 @@
 		99C0532B21FD0DF20054601A /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		99C0532D21FD12C10054601A /* Word.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
 		99C0532F21FD12DE0054601A /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
-		99C0533221FDD3170054601A /* LanguagesList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LanguagesList.storyboard; sourceTree = "<group>"; };
 		99EE795021FC8709008F5C19 /* SwiftTranslatorApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftTranslatorApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		99EE795321FC8709008F5C19 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		99EE795821FC8709008F5C19 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -205,7 +203,6 @@
 			children = (
 				99EE795721FC8709008F5C19 /* Main.storyboard */,
 				99EE795C21FC870B008F5C19 /* LaunchScreen.storyboard */,
-				99C0533221FDD3170054601A /* LanguagesList.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -363,7 +360,6 @@
 			files = (
 				99EE795E21FC870B008F5C19 /* LaunchScreen.storyboard in Resources */,
 				99EE795B21FC870B008F5C19 /* Assets.xcassets in Resources */,
-				99C0533321FDD3170054601A /* LanguagesList.storyboard in Resources */,
 				99EE795921FC8709008F5C19 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

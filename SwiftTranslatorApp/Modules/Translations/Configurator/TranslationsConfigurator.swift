@@ -20,6 +20,7 @@ class TranslationsModuleConfigurator {
     private func configure(viewController: TranslationsViewController) {
 
         let router = TranslationsRouter()
+        router.viewController = viewController
 
         let presenter = TranslationsPresenter()
         presenter.view = viewController

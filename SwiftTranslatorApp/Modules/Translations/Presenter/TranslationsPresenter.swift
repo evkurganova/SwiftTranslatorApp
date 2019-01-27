@@ -13,6 +13,42 @@ class TranslationsPresenter: TranslationsModuleInput, TranslationsViewOutput, Tr
     var router: TranslationsRouterInput!
 
     func viewIsReady() {
-
+        
+        interactor.getAllWords()
+    }
+    
+    func translate(word: String) {
+        
+        interactor.translateWord(with: word)
+    }
+    
+    func filterWords(by searchText: String) {
+        
+        interactor.getAllWords(with: searchText)
+    }
+    
+    func showAllWords() {
+        
+        interactor.getAllWords()
+    }
+    
+    func remove(word: Word) {
+        
+        interactor.remove(word)
+    }
+    
+    func openLanguageList() {
+        
+        router.showLanguageList()
+    }
+    
+    func showList(of words: [Word]) {
+        
+        view.setList(of: words)
+    }
+    
+    func reloadBarButtonTitle() {
+        
+        view.setBarButtonTitle(with: interactor.getCurrentLanguageName())
     }
 }

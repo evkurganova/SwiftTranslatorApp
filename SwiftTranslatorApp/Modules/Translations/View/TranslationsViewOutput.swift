@@ -14,4 +14,11 @@ protocol TranslationsViewOutput {
     */
 
     func viewIsReady()
+    func translate(word: String)
+    func filterWords(by searchText: String)
+    func showAllWords()
+    func remove(word: Word)
+    func openLanguageList()
+    func reloadBarButtonTitle()
+
 }
