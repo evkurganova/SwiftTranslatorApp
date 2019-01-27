@@ -13,7 +13,6 @@ class Language: Object {
     @objc dynamic var ID = ""
     @objc dynamic var name = ""
     @objc dynamic var isCurrent = false
-    let words = List<Word>()
 
     override static func primaryKey() -> String? {
         return "ID"

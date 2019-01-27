@@ -16,29 +16,130 @@ class DataService {
     static let sharedInstance = DataService()
     
     private init() {
+        
         realm = try! Realm()
     }
     
-    func getDataFromDB() -> Results<Word> {
-        let results: Results<Word> = realm.objects(Word.self)
-//        let results = realm.objects(Word.self).filter(NSPredicate(format: "name contains 'x'"))
+    func getAllLanguages() -> Results<Language> {
+        
+        let results: Results<Language> = realm.objects(Language.self).sorted(byKeyPath: "name", ascending: true)
+        return results;
+    }
+    
+    func getCurrentLanguage() -> Language {
+        
+        let results = realm.objects(Language.self).filter(NSPredicate(format: "isCurrent == true"))
+        
+        if let language = results.first {
+            return language
+        } else {
+
+            let defaultLanguage = Language()
+            defaultLanguage.ID = "en"
+            defaultLanguage.name = "Английский"
+            defaultLanguage.isCurrent = true
+
+            realm.beginWrite()
+            realm.add(defaultLanguage)
+            try! realm.commitWrite()
+            
+            return defaultLanguage
+        }
+    }
+    
+    func setCurrentLanguage(newCurrentLanguage:Language)
+    {
+        let oldLanguage = self.getCurrentLanguage()
+        
+        try! realm.write {
+            oldLanguage.isCurrent = false
+            newCurrentLanguage.isCurrent = true
+            
+//            [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationCurrentLanguageChanged object:nil];
+
+        }
+    }
+    
+    func saveLanguage(ID: String, name: String) {
+        
+        let currentLanguage = self.getCurrentLanguage()
+
+        let language = Language()
+        language.ID = ID
+        language.name = name
+        language.isCurrent = (currentLanguage.ID == ID)
+        
+        realm.beginWrite()
+        realm.add(language)
+        try! realm.commitWrite()
+    }
+    
+    func getAllWords() -> Results<Word> {
+        
+        let results: Results<Word> = realm.objects(Word.self).sorted(byKeyPath: "changedDate", ascending: false)
         return results
     }
     
-    func addData(object: Word) {
-        try! realm.write {
-            realm.add(object, update: true)
-            print("Added new object")
+    func getAllWords(searchText: String) -> Results<Word> {
+        
+        let results = realm.objects(Word.self).filter(NSPredicate(format: "translatedWord contains '\(searchText)' OR nativeWord contains '\(searchText)")).sorted(byKeyPath: "changedDate", ascending: false)
+        return results
+    }
+    
+    func createWord(nativeWord: String) {
+        
+        let currentLanguage = self.getCurrentLanguage()
+
+        let results = realm.objects(Word.self).filter(NSPredicate(format: "nativeWord == '\(nativeWord)' AND language == '\(currentLanguage)'"))
+
+        if let word = results.first {
+            
+            try! realm.write {
+                word.changedDate = Date()
+            }
+            
+        } else {
+            
+            let word = Word()
+            word.nativeWord = nativeWord
+            word.language = currentLanguage
+            word.changedDate = Date()
+
+            realm.beginWrite()
+            realm.add(word)
+            try! realm.commitWrite()
         }
     }
     
-    func deleteAllFromDatabase() {
-        try! realm.write {
-            realm.deleteAll()
+    func saveWord(nativeWord: String, translatedWord: String) {
+        
+        let currentLanguage = self.getCurrentLanguage()
+        
+        let results = realm.objects(Word.self).filter(NSPredicate(format: "nativeWord == '\(nativeWord)' AND language == '\(currentLanguage)'"))
+        
+        if let word = results.first {
+            
+            try! realm.write {
+                word.translatedWord = translatedWord
+                word.changedDate = Date()
+            }
+            
+        } else {
+            
+            let word = Word()
+            word.nativeWord = nativeWord
+            word.translatedWord = translatedWord
+            word.language = currentLanguage
+            word.changedDate = Date()
+            
+            realm.beginWrite()
+            realm.add(word)
+            try! realm.commitWrite()
         }
     }
     
-    func deleteFromDb(object: Word) {
+    func removeWord(object: Word) {
+        
         try! realm.write {
             realm.delete(object)
         }

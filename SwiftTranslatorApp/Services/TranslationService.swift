@@ -57,15 +57,7 @@ class TranslationService {
                     
                     let text: String = textArray.first ?? ""
                     
-                    guard let languageCode = json["lang"] as? String else {
-                        completionHandler(false, nil)
-                        return
-                    }
-                    
-                    let substring = languageCode[languageCode.index(languageCode.startIndex, offsetBy: 3)...languageCode.index(languageCode.startIndex, offsetBy: 5)]
-                    let languageID = String(substring)
-                    
-                    //create word with native word, text and languageCode
+                    DataService.sharedInstance.saveWord(nativeWord: nativeWord, translatedWord: text)
                     
                     completionHandler(true, nil)
 
@@ -79,7 +71,6 @@ class TranslationService {
                 print(error)
                 completionHandler(false, error)
             }
-            
         }
     }
     
@@ -106,13 +97,13 @@ class TranslationService {
                     return
                 }
                 
-                if (json["langs"] as? [String:Any]) != nil {
+                if (json["langs"] as? [String:String]) != nil {
                     
-                    let languagesDict: [String:Any] = json["langs"] as! [String : Any]
+                    let languagesDict: [String:String] = json["langs"] as! [String : String]
 
                     for (languageCode, languageName) in languagesDict
                     {
-                        //create language with languageCode
+                        DataService.sharedInstance.saveLanguage(ID: languageCode, name: languageName)
                     }
                     
                     completionHandler(true, nil)
