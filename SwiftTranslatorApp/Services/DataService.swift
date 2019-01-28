@@ -100,7 +100,7 @@ class DataService {
     
     func getAllWords(searchText: String) -> [Word] {
         
-        let results = realm.objects(Word.self).filter(NSPredicate(format: "translatedWord contains '\(searchText)' OR nativeWord contains '\(searchText)'")).sorted(byKeyPath: "changedDate", ascending: false)
+        let results = realm.objects(Word.self).filter(NSPredicate(format: "translatedWord contains[cd] '\(searchText)' OR nativeWord contains[cd] '\(searchText)'")).sorted(byKeyPath: "changedDate", ascending: false)
         let array = Array(results)
         return array;
     }

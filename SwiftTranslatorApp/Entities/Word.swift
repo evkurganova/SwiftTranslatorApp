@@ -15,7 +15,4 @@ class Word: Object {
     @objc dynamic var changedDate = Date()
     @objc dynamic var language: Language? = nil
 
-//    override static func primaryKey() -> String? {
-//        return "nativeWord"
-//    }
 }
