@@ -41,10 +41,6 @@ class TranslationService {
             switch response.result {
             case .success:
                 
-                print("Request: \(String(describing: response.request))")
-                print("Response: \(String(describing: response.response))")
-                print("Result: \(response.result)")
-                
                 guard let json = response.result.value as? [String:Any] else {
                     completionHandler(false, nil)
                     return
@@ -83,16 +79,12 @@ class TranslationService {
         //    & [ui=<код языка>]
         //    & [callback=<имя callback-функции>]
         
-        let urlString = String("\(baseUrl)getLangs?key=\(apiKey)@&ui=ru")
+        let urlString = String("\(baseUrl)getLangs?key=\(apiKey)&ui=ru")
         
         Alamofire.request(urlString).validate().responseJSON { response in
             
             switch response.result {
             case .success:
-                
-                print("Request: \(String(describing: response.request))")
-                print("Response: \(String(describing: response.response))")
-                print("Result: \(response.result)")
                 
                 guard let json = response.result.value as? [String:Any] else {
                     completionHandler(false, nil);

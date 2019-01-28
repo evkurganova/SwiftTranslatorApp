@@ -100,7 +100,7 @@ class TranslationsViewController: UIViewController, TranslationsViewInput, UITab
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TranslationCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TranslationCell", for: indexPath) as UITableViewCell
         
         let word = data[indexPath.row]
         
@@ -108,9 +108,9 @@ class TranslationsViewController: UIViewController, TranslationsViewInput, UITab
         cell.detailTextLabel?.text = word.translatedWord
         cell.textLabel?.textColor = UIColor.black
         cell.detailTextLabel?.textColor = UIColor.black
-        cell.backgroundColor = UIColor.white;
-        cell.selectionStyle = UITableViewCell.SelectionStyle.none;
-
+        cell.backgroundColor = UIColor.white
+        cell.selectionStyle = UITableViewCell.SelectionStyle.none
+        
         cell.textLabel?.lineBreakMode = NSLineBreakMode.byWordWrapping
         cell.detailTextLabel?.lineBreakMode = NSLineBreakMode.byWordWrapping
         

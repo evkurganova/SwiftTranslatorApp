@@ -35,6 +35,7 @@ class LanguagesViewController: UIViewController, LanguagesViewInput, UITableView
         self.tableView.dataSource = self
         self.tableView.backgroundColor = UIColor.white
         
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "LanguageCell")
     }
     
     func setList(of languages: [Language]) {

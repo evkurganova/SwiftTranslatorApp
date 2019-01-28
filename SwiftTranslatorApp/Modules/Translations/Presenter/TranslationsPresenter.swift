@@ -14,6 +14,7 @@ class TranslationsPresenter: TranslationsModuleInput, TranslationsViewOutput, Tr
 
     func viewIsReady() {
         
+        view.setupInitialState()
         interactor.getAllWords()
     }
     

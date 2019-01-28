@@ -69,14 +69,26 @@ class DataService {
         
         let currentLanguage = self.getCurrentLanguage()
 
-        let language = Language()
-        language.ID = ID
-        language.name = name
-        language.isCurrent = (currentLanguage.ID == ID)
+        let results = realm.objects(Language.self).filter(NSPredicate(format: "ID == '\(ID)'"))
         
-        realm.beginWrite()
-        realm.add(language)
-        try! realm.commitWrite()
+        if let language = results.first {
+            
+            try! realm.write {
+                language.name = name
+                language.isCurrent = (currentLanguage.ID == ID)
+            }
+            
+        } else {
+            
+            let language = Language()
+            language.ID = ID
+            language.name = name
+            language.isCurrent = (currentLanguage.ID == ID)
+            
+            realm.beginWrite()
+            realm.add(language)
+            try! realm.commitWrite()
+        }
     }
     
     func getAllWords() -> [Word] {
@@ -88,7 +100,7 @@ class DataService {
     
     func getAllWords(searchText: String) -> [Word] {
         
-        let results = realm.objects(Word.self).filter(NSPredicate(format: "translatedWord contains '\(searchText)' OR nativeWord contains '\(searchText)")).sorted(byKeyPath: "changedDate", ascending: false)
+        let results = realm.objects(Word.self).filter(NSPredicate(format: "translatedWord contains '\(searchText)' OR nativeWord contains '\(searchText)'")).sorted(byKeyPath: "changedDate", ascending: false)
         let array = Array(results)
         return array;
     }
@@ -97,7 +109,7 @@ class DataService {
         
         let currentLanguage = self.getCurrentLanguage()
 
-        let results = realm.objects(Word.self).filter(NSPredicate(format: "nativeWord == '\(nativeWord)' AND language == '\(currentLanguage)'"))
+        let results = realm.objects(Word.self).filter(NSPredicate(format: "nativeWord == '\(nativeWord)' AND language.ID == '\(currentLanguage.ID)'"))
 
         if let word = results.first {
             
@@ -122,7 +134,7 @@ class DataService {
         
         let currentLanguage = self.getCurrentLanguage()
         
-        let results = realm.objects(Word.self).filter(NSPredicate(format: "nativeWord == '\(nativeWord)' AND language == '\(currentLanguage)'"))
+        let results = realm.objects(Word.self).filter(NSPredicate(format: "nativeWord == '\(nativeWord)' AND language.ID == '\(currentLanguage.ID)'"))
         
         if let word = results.first {
             

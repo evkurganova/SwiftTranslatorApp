@@ -14,6 +14,7 @@ class LanguagesPresenter: LanguagesModuleInput, LanguagesViewOutput, LanguagesIn
 
     func viewIsReady() {
         
+        view.setupInitialState()
         interactor.getAllLanguages()
     }
     
